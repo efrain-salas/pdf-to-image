@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     exit;
 }
 
-$id = uniqid();
+$id = $_POST['id'] ?? uniqid();
 $workbenchPath = '/workbench';
 $pdfFilePath = "$workbenchPath/$id.pdf";
 move_uploaded_file($_FILES['file']['tmp_name'], $pdfFilePath);
