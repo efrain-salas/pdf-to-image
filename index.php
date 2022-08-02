@@ -17,7 +17,7 @@ $pdf->setCompressionQuality(100);
 $pdf->saveAllPagesAsImages($workbenchPath, $id.'_');
 
 $outputZipFilePath = "$workbenchPath/$id.zip";
-exec("zip $outputZipFilePath $workbenchPath/*.jpg");
+exec("zip -j $outputZipFilePath $workbenchPath/*.jpg");
 
 header('X-Num-Pages: ' . $pdf->getNumberOfPages());
 header('Content-Description: File Transfer');
