@@ -16,8 +16,9 @@ $pdf = new Spatie\PdfToImage\Pdf($pdfFilePath);
 $pdf->setCompressionQuality(100);
 $pdf->saveAllPagesAsImages($workbenchPath, $id.'_');
 
-$outputZipFilePath = "$workbenchPath/$id.zip";
-exec("zip -j $outputZipFilePath $workbenchPath/*.jpg");
+$zipFileName = "$id.zip";
+$outputZipFilePath = "$workbenchPath/$zipFileName";
+exec("cd $workbenchPath && zip $zipFileName $id*.jpg");
 
 header('X-Num-Pages: ' . $pdf->getNumberOfPages());
 header('Content-Description: File Transfer');
