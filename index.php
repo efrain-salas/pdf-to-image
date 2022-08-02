@@ -19,6 +19,7 @@ $pdf->saveAllPagesAsImages($workbenchPath, $id.'_');
 $outputZipFilePath = "$workbenchPath/$id.zip";
 exec("zip $outputZipFilePath $workbenchPath/*.jpg");
 
+header('X-Num-Pages: ' . $pdf->getNumberOfPages());
 header('Content-Description: File Transfer');
 header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename="'.basename($outputZipFilePath).'"');
