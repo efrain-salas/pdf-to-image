@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -q -y php-cli php-imagick composer zip
 RUN rm /etc/ImageMagick-6/policy.xml
