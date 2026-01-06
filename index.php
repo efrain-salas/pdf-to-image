@@ -14,6 +14,7 @@ move_uploaded_file($_FILES['file']['tmp_name'], $pdfFilePath);
 
 $pdf = new Spatie\PdfToImage\Pdf($pdfFilePath);
 $pdf->setCompressionQuality(100);
+$pdf->setResolution(300);
 $pdf->saveAllPagesAsImages($workbenchPath, $id.'_');
 
 $numPages = $pdf->getNumberOfPages();
