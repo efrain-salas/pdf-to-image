@@ -20,7 +20,9 @@ $pdf->saveAllPagesAsImages($workbenchPath, $id.'_');
 $numPages = $pdf->getNumberOfPages();
 header('X-Num-Pages: ' . $numPages);
 
-if ($numPages === 1) {
+$alwaysZip = isset($_GET['alwaysZip']);
+
+if ($numPages === 1 && !$alwaysZip) {
     // Solo una página: devolver la imagen directamente
     $imageFilePath = "$workbenchPath/{$id}_1.jpg";
 
@@ -33,7 +35,7 @@ if ($numPages === 1) {
     header('Content-Length: ' . filesize($imageFilePath));
     readfile($imageFilePath);
 } else {
-    // Múltiples páginas: crear y devolver ZIP
+    // Múltiples páginas o alwaysZip: crear y devolver ZIP
     $zipFileName = "$id.zip";
     $outputZipFilePath = "$workbenchPath/$zipFileName";
     exec("cd $workbenchPath && zip $zipFileName $id*.jpg");
